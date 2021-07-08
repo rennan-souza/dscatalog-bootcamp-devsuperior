@@ -11,7 +11,7 @@ const Navbar = () => {
         </Link>
 
         <button
-          className="navbar-toggler"
+          className="navbar-toggler  border-0 shadow-none"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#dscatalog-navbar"
@@ -22,7 +22,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="dscatalog-navbar">
+        <div className="collapse navbar-collapse" id="dscatalog-navbar"> 
           <ul className="navbar-nav offset-md-2 main-menu">
             <li>
               <NavLink to="/" activeClassName="active" exact>
