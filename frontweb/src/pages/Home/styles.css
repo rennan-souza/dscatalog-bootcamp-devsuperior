@@ -1,5 +1,6 @@
 .home-container {
   padding: 10px;
+  margin-top: -10px;
   font-size: 20px;
   text-align: center;
 }
@@ -41,7 +42,7 @@
 
 @media (min-width: 576px) {
   .home-container {
-    padding: 15px;
+    padding: 10px;
     font-size: 40px;
   }
 

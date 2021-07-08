@@ -1,5 +1,6 @@
 .product-details-container {
   padding: 10px;
+  margin-top: -10px;
   font-size: 24px;
 }
 
@@ -11,6 +12,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  margin-top: -15px;
 }
 
 .goback-container h2 {
@@ -119,7 +121,7 @@
   }
 
   .name-price-container {
-    margin-bottom: -12px;
+    margin-bottom: -20px;
   }
 
 }  
@@ -127,7 +129,7 @@
 @media(min-width: 1400px) {
   .img-container img {
     width: auto;
-    height: 480px;
+    height: 410px;
   }
 
   .description-container {
