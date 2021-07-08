@@ -10,27 +10,23 @@ import './styles.css';
 
 type UrlParams = {
   productId: string;
-}
+};
 
 const ProductDetails = () => {
-
   const { productId } = useParams<UrlParams>();
 
   const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/products/${productId}`)
-    .then(response => {
+    axios.get(`${BASE_URL}/products/${productId}`).then((response) => {
       setProduct(response.data);
-    })
+    });
   }, [productId]);
-
-  
 
   return (
     <div className="product-details-container">
       <div className="base-card product-details-card">
-        <Link to="/products"> 
+        <Link to="/products">
           <div className="goback-container">
             <ArroIcon /> <h2>VOLTAR</h2>
           </div>
@@ -42,15 +38,13 @@ const ProductDetails = () => {
             </div>
             <div className="name-price-container">
               <h1>{product?.name}</h1>
-              { product && <ProductPrice price={product?.price} /> }
+              {product && <ProductPrice price={product?.price} />}
             </div>
           </div>
           <div className="col-xl-6">
             <div className="description-container">
               <h2>Descrição do produto</h2>
-              <p>
-              {product?.description}
-              </p>
+              <p>{product?.description}</p>
             </div>
           </div>
         </div>
