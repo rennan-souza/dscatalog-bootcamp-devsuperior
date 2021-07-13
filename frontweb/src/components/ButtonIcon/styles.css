@@ -3,6 +3,7 @@
 }
 
 .btn-container button {
+  width: calc(100% - 50px);
   border-radius: 10px 0 0 10px;
 }
 
@@ -24,11 +25,16 @@
 }
 
 @media (min-width: 576px) {
+
   .btn-icon-container {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 
+  .btn-container button {
+    width: calc(100% - 60px);
+  }
+  
   .btn h6 {
     font-size: 18px;
   }
