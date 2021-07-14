@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import ButtonIcon from '../../../components/ButtonIcon';
 import { useForm } from 'react-hook-form';
-import { requestBackendLogin } from '../../../util/requests';
+import { getAuthData, requestBackendLogin, saveAuthData } from '../../../util/requests';
 import { useState } from 'react';
 
 import './styles.css';
@@ -24,11 +24,12 @@ const Login = () => {
     requestBackendLogin(formData)
       .then((response) => {
         setHasError(false);
-        console.log('SUCESSO', response);
+        saveAuthData(response.data);
+        const token = getAuthData().access_token;
+        console.log(token);
       })
       .catch((error) => {
         setHasError(true);
-        console.log('ERRO', error);
       });
   };
 
