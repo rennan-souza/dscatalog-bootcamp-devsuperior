@@ -1,41 +1,36 @@
-import './styles.css';
 import 'bootstrap/js/src/collapse.js';
+import './styles.css';
 import { Link, NavLink } from 'react-router-dom';
 import {
   getTokenData,
   isAuthenticated,
   removeAuthData,
-  TokenData,
 } from '../../util/requests';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import history from '../../util/history';
-
-type AuthData = {
-  autheticated: boolean;
-  tokenData?: TokenData;
-};
+import { AuthContext } from '../../AuthContext';
+import { useContext } from 'react';
 
 const Navbar = () => {
-  const [authData, setAuthData] = useState<AuthData>({ autheticated: false });
+  const { authContextData, setAuthContextData } = useContext(AuthContext);
 
   useEffect(() => {
     if (isAuthenticated()) {
-      setAuthData({
+      setAuthContextData({
         autheticated: true,
         tokenData: getTokenData(),
       });
     } else {
-      setAuthData({
+      setAuthContextData({
         autheticated: false,
       });
     }
-  }, []);
+  }, [setAuthContextData]);
 
   const handleLogoutClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
     removeAuthData();
-    setAuthData({
+    setAuthContextData({
       autheticated: false,
     });
     history.replace('/');
@@ -78,7 +73,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-login-logout-mobile mt-4">
-              {authData.autheticated ? (
+              {authContextData.autheticated ? (
                 <a href="#logout" onClick={handleLogoutClick}>
                   LOGOUT
                 </a>
@@ -90,10 +85,10 @@ const Navbar = () => {
         </div>
 
         <div className="nav-login-logout">
-          {authData.autheticated ? (
+          {authContextData.autheticated ? (
             <>
               <span className="nav-username">
-                {authData.tokenData?.user_name}
+                {authContextData.tokenData?.user_name}
               </span>
               <a href="#logout" onClick={handleLogoutClick}>
                 LOGOUT
