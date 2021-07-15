@@ -1,7 +1,12 @@
 import './styles.css';
 import 'bootstrap/js/src/collapse.js';
 import { Link, NavLink } from 'react-router-dom';
-import { getTokenData, isAuthenticated, removeAuthData, TokenData } from '../../util/requests';
+import {
+  getTokenData,
+  isAuthenticated,
+  removeAuthData,
+  TokenData,
+} from '../../util/requests';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import history from '../../util/history';
@@ -34,7 +39,7 @@ const Navbar = () => {
       autheticated: false,
     });
     history.replace('/');
-  }
+  };
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-primary main-nav">
@@ -72,21 +77,32 @@ const Navbar = () => {
                 ADMIN
               </NavLink>
             </li>
+            <li className="nav-login-logout-mobile mt-4">
+              {authData.autheticated ? (
+                <a href="#logout" onClick={handleLogoutClick}>
+                  LOGOUT
+                </a>
+              ) : (
+                <Link to="/admin/auth">LOGIN</Link>
+              )}
+            </li>
           </ul>
         </div>
 
-        <div>
+        <div className="nav-login-logout">
           {authData.autheticated ? (
-              <>
-                <span>{authData.tokenData?.user_name}</span>
-                <a href="#logout" onClick={handleLogoutClick}>LOGOUT</a>
-              </>
-            ) : (
-              <Link to="/admin/auth">LOGIN</Link>
-            )
-          }
+            <>
+              <span className="nav-username">
+                {authData.tokenData?.user_name}
+              </span>
+              <a href="#logout" onClick={handleLogoutClick}>
+                LOGOUT
+              </a>
+            </>
+          ) : (
+            <Link to="/admin/auth">LOGIN</Link>
+          )}
         </div>
-
       </div>
     </nav>
   );
