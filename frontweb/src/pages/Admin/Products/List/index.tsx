@@ -1,6 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Pagination from '../../../../components/Pagination';
 import { Product } from '../../../../types/product';
 import { requestBackend } from '../../../../util/requests';
 import { SpringPage } from '../../../../util/vendor/spring';
@@ -48,6 +49,7 @@ const List = () => {
           </div>
         ))}
       </div>
+      <Pagination />
     </div>
   );
 };
