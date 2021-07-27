@@ -9,6 +9,7 @@ import Select from 'react-select';
 import { Category } from '../../../../types/category';
 import { Product } from '../../../../types/product';
 import { requestBackend } from '../../../../util/requests';
+import CurrencyInput from 'react-currency-input-field';
 
 type UrlParams = {
   productId: string;
@@ -53,12 +54,16 @@ const Form = () => {
   }, [isEditing, productId, setValue]);
 
   const onSubmit = (formData: Product) => {
+    const data = {
+      ...formData,
+      price: String(formData.price).replace(',', '.'),
+    };
 
     const config: AxiosRequestConfig = {
       method: isEditing ? 'PUT' : 'POST',
       url: isEditing ? `/products/${productId}` : `/products`,
       withCredentials: true,
-      data: formData,
+      data,
     };
 
     requestBackend(config).then(() => {
@@ -120,16 +125,21 @@ const Form = () => {
               </div>
 
               <div className="margin-bottom-30">
-                <input
-                  {...register('price', {
-                    required: 'Campo obrigatório',
-                  })}
-                  type="text"
-                  className={`form-control base-input ${
-                    errors.price ? 'is-invalid' : ''
-                  }`}
-                  placeholder="Preço do produto"
+                <Controller
                   name="price"
+                  rules={{ required: 'Campo obrigatório' }}
+                  control={control}
+                  render={({ field }) => (
+                    <CurrencyInput
+                      placeholder="Preço"
+                      className={`form-control base-input ${
+                        errors.price ? 'is-invalid' : ''
+                      }`}
+                      disableGroupSeparators={true}
+                      value={field.value}
+                      onValueChange={field.onChange}
+                    />
+                  )}
                 />
                 <div className="invalid-feedback d-block">
                   {errors.price?.message}
@@ -142,8 +152,8 @@ const Form = () => {
                     required: 'Campo obrigatório',
                     pattern: {
                       value: /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/gm,
-                      message: 'Deve ser uma URL Inválida'
-                    }
+                      message: 'Deve ser uma URL Inválida',
+                    },
                   })}
                   type="text"
                   className={`form-control base-input ${
