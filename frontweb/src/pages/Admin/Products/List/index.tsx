@@ -10,6 +10,7 @@ import { Product } from '../../../../types/product';
 import { requestBackend } from '../../../../util/requests';
 import { SpringPage } from '../../../../util/vendor/spring';
 import ProductCrudCard from '../ProductCrudCard';
+
 import './styles.css';
 
 type ControlComponentsData = {
@@ -67,8 +68,8 @@ const List = () => {
       </div>
       <div className="row">
         {page?.content.map((product) => (
-          <div className="col-sm-6 col-md-12" key={product.id}>
-            <ProductCrudCard product={product} onDelete={() => {}} />
+          <div key={product.id} className="col-sm-6 col-md-12">
+            <ProductCrudCard product={product} onDelete={getProducts} />
           </div>
         ))}
       </div>

@@ -62,7 +62,7 @@ const Catalog = () => {
 
       <div className="row">
         <Pagination 
-          pageCount={(page) ? page.totalPages : 0}
+          pageCount={page ? page.totalPages : 0}
           range={3}
           onChange={getProducts}
         />
