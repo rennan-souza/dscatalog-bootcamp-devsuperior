@@ -1,15 +1,18 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import Catalog from "..";
 import history from '../../../util/history';
-import { Router } from "react-router-dom";
+import { Router } from 'react-router-dom';
+import { server } from './fixtures';
 
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
 
-test('shold render Catalog with products', async () => {
+test('should render Catalog with products', async () => {
 
     render(
-
         <Router history={history}>
-            <Catalog />
+             <Catalog />
         </Router>
     );
 
